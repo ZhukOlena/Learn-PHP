@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__.'/history.php';
+
 function calculator_add($a, $b)
 {
     return $a + $b;
@@ -84,4 +86,28 @@ function calculator_log10($a):float
 function calculator_log1p($a):float
 {
     return log1p($a);
+}
+
+function calculator_history ($countHistories = null)
+{
+    if (file_exists(CALCULATOR_HISTORY_FILE_PATH)) {
+        $historyContent = file_get_contents(CALCULATOR_HISTORY_FILE_PATH);
+        $histories = json_decode($historyContent, true);
+    } else {
+        $histories = [];
+    }
+
+    $histories = array_reverse($histories);
+
+    if ($countHistories !== null) {
+        $histories = array_slice($histories, 0, $countHistories);
+    }
+
+    $normalizedHistories = [];
+
+    foreach ($histories as $history) {
+        $normalizedHistories[] = $history ['command']. ' Result: '.$history['result'];
+    }
+
+    return implode(PHP_EOL, $normalizedHistories);
 }

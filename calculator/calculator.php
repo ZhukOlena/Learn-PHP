@@ -25,8 +25,13 @@ function calculator_run()
 
     $result = call_user_func_array($commandFunctions['handler'], $commandInfo['arguments']);
 
-    print $commandInfo['command_name']. " Result: ". $result.PHP_EOL;
+    if ('history' !== $commandInfo['command_name']) {
+        calculator_history_add($commandInfo['command_name'], $commandInfo['arguments'], $result);
 
+        print $commandInfo['command_name']. " Result: ". $result.PHP_EOL;
+    } else {
+        print $result;
+    }
 }
 
 function calculator_get_command_function($command)
@@ -164,6 +169,11 @@ function calculator_get_command_function($command)
             'validators' => [
                 'calculator_validator_exist_first_argument',
                 'calculator_validator_first_argument_numeric',
+                ],
+        ],
+        'history' => [
+            'handler' => 'calculator_history',
+            'validators' => ['calculator_validator_first_argument_numeric',
                 ],
         ],
     ];

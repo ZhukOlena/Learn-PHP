@@ -3,6 +3,7 @@
 include_once __DIR__.'/operators.php';
 include_once __DIR__.'/calculator.php';
 include_once __DIR__.'/validators.php';
+include_once __DIR__.'/history.php';
 
 ini_set('display_errors', true);
 ini_set('error_reporting', E_ALL);
