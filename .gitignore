@@ -1,4 +1,9 @@
 .hello
 .idea
-test.php
-/foo-bar
+test.*
+/calculator/history.json
+/calculator/time.php
+
+
+
+
