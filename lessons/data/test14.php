@@ -80,6 +80,7 @@ foreach ($outputReports as $date => $info) {
         $info['returned'],
     ]);
 }
+
 print_r($outputReports);
 
 

@@ -8,6 +8,7 @@ ini_set('error_reporting', E_ALL);
 $inputFile = fopen(__DIR__.'/lesson-14-report.csv', 'rb');
 $outputFile = fopen(__DIR__.'/testClass-14-output.csv', 'wb+');
 
+
 //class ReportElement
 //{
 //    private $mode;
