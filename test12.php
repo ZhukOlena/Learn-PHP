@@ -13,7 +13,7 @@ function render_result(array $result)
         foreach ($fopData as $date => $amounts) {
             $date = date_create_from_format('Y-m', $date);
 
-            print $fopName.' '.date_format($date, 'F Y').' -  '.number_format($amounts, 2, '.', '').' '.'UAH'.PHP_EOL;
+            print $fopName.' '.date_format($date, 'F Y').' -  '.number_format($amounts, 2, '.', '').' '.'UAH'.PHP_EOL.PHP_EOL;
         }
     }
 }
@@ -64,12 +64,23 @@ foreach ($result as $key => $reportItem) {
         if ($a === $b) {
             return 0;
         }
-        return $a['date'] > $b ['date'] ? 1 : -1;
+        return $a < $b  ? 1 : -1;
     });
     $sortedReport [$key] = $reportItem;
 }
 
 render_result($sortedReport);
+
+$sorterReportFop = [];
+
+//foreach ($result as $key => $repotrItemFop) {
+//    uasort($repotrItemFop,function($a, $b) {
+//        if ($a === $b) {
+//            return 0;
+//        }
+//
+//    }
+//}
 
 
 
