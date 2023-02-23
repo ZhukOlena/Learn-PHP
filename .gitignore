@@ -1,12 +1,10 @@
 .hello
 .idea
 test.*
-/calculator/history.json
+/calculator-old/history.json
 /calculator/time.php
-/lessons/test02_18.php
-/lessons/test02_18.csv
-/lessons/New_Work_18.02.23.csv
-
+/lessons/lafeta/*
+/lessons/PRRO-report/*
 
 
 
