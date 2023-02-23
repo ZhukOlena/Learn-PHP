@@ -24,7 +24,7 @@ class Calculator
      *
      * @return float
      */
-    public function run(string $command, float $left, float $right): float
+    public function run(string $command, ?float $left, ?float $right): float
     {
         $calculatorCommand = $this->registry->get($command);
 

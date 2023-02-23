@@ -2,7 +2,10 @@
 
 class AddCalculatorCommand implements CalculatorCommandInterface
 {
-    public function calculate(float $left, float $right): float
+    /**
+     *{@inheritdoc }
+     */
+    public function calculate(?float $left, ?float $right): float
     {
        return $left + $right;
     }
