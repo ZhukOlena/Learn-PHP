@@ -1,5 +1,9 @@
 <?php
 
+namespace Calculator;
+
+use CalculatorCommandsRegistry;
+
 class Calculator
 {
     /**
@@ -26,7 +30,10 @@ class Calculator
      */
     public function run(string $command, ?float $left, ?float $right): float
     {
-        $calculatorCommand = $this->registry->get($command);
+        $calculatorCommand = $this->registry->getCommand($command);
+        $commandValidator = $this->registry->getValidators($command);
+
+        $commandValidator->validate($left, $right);
 
         $result = $calculatorCommand->calculate($left, $right);
 

@@ -1,5 +1,7 @@
 <?php
 
+use Calculator\Calculator;
+
 ini_set('display_errors', '1');
 ini_set('error_reporting', E_ALL);
 
@@ -17,20 +19,24 @@ include_once __DIR__. '/Command/SqrtCalculatorCommand.php';
 include_once __DIR__. '/Command/TanCalculatorCommand.php';
 include_once __DIR__ . '/CalculatorCommandsRegistry.php';
 include_once __DIR__ . '/Calculator.php';
+include_once __DIR__. '/Validator/CalculatorArgumentsValidatorInterface.php';
+include_once __DIR__. '/Validator/LeftAndRightExistenceValidator.php';
+include_once __DIR__. '/Validator/LeftExistenceValidator.php';
+include_once __DIR__. '/Validator/NoneExistenceValidator.php';
 
 
 $registry = new CalculatorCommandsRegistry();
-$registry->add('add', new AddCalculatorCommand());
-$registry->add('cos', new CosCalculatorCommand());
-$registry->add('exp', new ExpCalculatorCommand());
-$registry->add('sub', new SubCalculatorCommand());
-$registry->add('div', new DivCalculatorCommand());
-$registry->add('mul', new MulCalculatorCommand());
-$registry->add('pi', new PiCalculatorCommand());
-$registry->add('pow', new PowCalculatorCommand());
-$registry->add('sin', new SinCalculatorCommand());
-$registry->add('sqrt', new SqrtCalculatorCommand());
-$registry->add('tan', new TanCalculatorCommand());
+$registry->add('add', new AddCalculatorCommand(), new \Calculator\Validator\LeftAndRightExistenceValidator());
+$registry->add('cos', new CosCalculatorCommand(), new \Calculator\Validator\LeftExistenceValidator());
+$registry->add('exp', new ExpCalculatorCommand(), new \Calculator\Validator\LeftExistenceValidator());
+$registry->add('sub', new SubCalculatorCommand(), new \Calculator\Validator\LeftAndRightExistenceValidator());
+$registry->add('div', new DivCalculatorCommand(), new \Calculator\Validator\LeftAndRightExistenceValidator());
+$registry->add('mul', new MulCalculatorCommand(), new \Calculator\Validator\LeftAndRightExistenceValidator());
+$registry->add('pi', new PiCalculatorCommand(), new \Calculator\Validator\NoneExistenceValidator());
+$registry->add('pow', new PowCalculatorCommand(), new \Calculator\Validator\LeftAndRightExistenceValidator());
+$registry->add('sin', new SinCalculatorCommand(), new \Calculator\Validator\LeftExistenceValidator());
+$registry->add('sqrt', new SqrtCalculatorCommand(), new \Calculator\Validator\LeftExistenceValidator());
+$registry->add('tan', new TanCalculatorCommand(), new \Calculator\Validator\LeftExistenceValidator());
 
 $calculator = new Calculator($registry);
 
@@ -60,6 +66,7 @@ if ($rightOperator && !is_numeric($rightOperator)) {
         ));
 }
 
+
 $result = $calculator->run($commandName, $leftOperator, $rightOperator);
 
 print sprintf(
@@ -69,5 +76,8 @@ print sprintf(
     $rightOperator,
     $result
 ).PHP_EOL;
+
+
+
 
 
