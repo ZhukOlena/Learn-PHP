@@ -1,5 +1,7 @@
 <?php
 
+use Calculator\Command\CalculatorCommandInterface;
+
 class SubCalculatorCommand implements CalculatorCommandInterface
 {
     /**
