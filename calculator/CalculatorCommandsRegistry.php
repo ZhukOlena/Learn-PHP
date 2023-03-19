@@ -1,6 +1,9 @@
 <?php
 
+namespace Calculator;
+
 use Calculator\Command\CalculatorCommandInterface;
+use Calculator\Validator\CalculatorArgumentsValidatorInterface;
 
 class CalculatorCommandsRegistry
 {
@@ -10,7 +13,7 @@ class CalculatorCommandsRegistry
     private array $commands = [];
 
     /**
-     * @var array<\Calculator\Validator\CalculatorArgumentsValidatorInterface>
+     * @var array<\>
      */
     private array $validators = [];
 
@@ -19,7 +22,7 @@ class CalculatorCommandsRegistry
      * @param CalculatorCommandInterface $command
      * @param \Calculator\Validator\CalculatorArgumentsValidatorInterface $validator
      */
-    public function add(string $commandName, CalculatorCommandInterface $command, \Calculator\Validator\CalculatorArgumentsValidatorInterface $validator): void
+    public function add(string $commandName, CalculatorCommandInterface $command, CalculatorArgumentsValidatorInterface $validator): void
     {
         $this->commands[$commandName] = $command;
         $this->validators[$commandName] = $validator;
@@ -32,7 +35,7 @@ class CalculatorCommandsRegistry
      * @return CalculatorCommandInterface
      * @throws Exception
      */
-    public function getCommand(string $commandName): \Calculator\Command\CalculatorCommandInterface
+    public function getCommand(string $commandName): CalculatorCommandInterface
     {
         if (!array_key_exists($commandName, $this->commands)){
             throw new \Exception(sprintf('Command with name "%s" was not found.', $commandName));
@@ -54,5 +57,4 @@ class CalculatorCommandsRegistry
         }
         return $this->validators[$commandName];
     }
-
 }

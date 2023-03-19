@@ -1,6 +1,7 @@
 .hello
 .idea
 test.*
+test_docker.php
 /calculator-old/history.json
 /calculator/time.php
 /lessons/lafeta/*
