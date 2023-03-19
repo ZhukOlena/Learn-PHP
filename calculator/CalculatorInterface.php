@@ -5,7 +5,7 @@ namespace Calculator;
 interface CalculatorInterface
 {
     /**
-     * Calculator spesific command with left and right operands.
+     * Calculator specific command with left and right operands.
      *
      * @param string $command
      * @param float|null $left

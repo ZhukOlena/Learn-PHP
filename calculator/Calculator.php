@@ -2,9 +2,7 @@
 
 namespace Calculator;
 
-use CalculatorCommandsRegistry;
-
-class Calculator
+class Calculator implements CalculatorInterface
 {
     /**
      * @var CalculatorCommandsRegistry
@@ -38,6 +36,5 @@ class Calculator
         $result = $calculatorCommand->calculate($left, $right);
 
         return $result;
-
     }
 }

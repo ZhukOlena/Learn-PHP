@@ -1,9 +1,19 @@
 <?php
 
+namespace Calculator\Command;
+
 use Calculator\Command\CalculatorCommandInterface;
 
 class MulCalculatorCommand implements CalculatorCommandInterface
 {
+    /**
+     * {@inheritdoc }
+     */
+    public function format(?float $left, ?float $right, float $result): string
+    {
+        return \sprintf('%.2f * %.2f = %.2f', $left, $right, $result);
+    }
+
     /**
      * {@inheritdoc }
      */
