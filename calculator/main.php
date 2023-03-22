@@ -17,6 +17,7 @@ use Calculator\Command\SubCalculatorCommand;
 use Calculator\Command\TanCalculatorCommand;
 use Calculator\Logger\ChainLogger;
 use Calculator\Logger\CsvLogger;
+use Calculator\Logger\DBLogger;
 use Calculator\Logger\JsonLogger;
 use Calculator\LogginCalculatorDecorator;
 use Calculator\Logger\TextLogger;
@@ -43,7 +44,8 @@ $registry->add('sqrt', new SqrtCalculatorCommand(), new LeftExistenceValidator()
 $registry->add('tan', new TanCalculatorCommand(), new LeftExistenceValidator());
 
 $calculator = new Calculator($registry);
-$logger = new ChainLogger([new JsonLogger(), new TextLogger(), new CsvLogger()]);
+$pdo = new \PDO('mysql:host=learn-mysql1;dbname=my_new_database', 'Olena', '123' );
+$logger = new ChainLogger([new JsonLogger(), new TextLogger(), new CsvLogger(), new DBLogger($pdo)]);
 $calculator = new LogginCalculatorDecorator($calculator, $logger);
 
 
