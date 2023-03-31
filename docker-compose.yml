@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+    nginx:
+         image: nginx
+         container_name: learn-php-nginx
+         ports:
+             - '8080:80'
+         volumes:
+            - './.docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf'
+            - './:/code'
+
+    web:
+        build:
+            dockerfile: ./Dockerfile
+        container_name: learn-php-web
+        tty: true
+        volumes:
+            - './:/code'
+
+    mysql:
+        image: mysql:8
+        container_name: learn-php-mysql
+        environment:
+            MYSQL_DATABASE: learn-php
+            MYSQL_USER: Olena
+            MYSQL_PASSWORD: 123
+            MYSQL_RANDOM_ROOT_PASSWORD: yes
+        ports:
+            - '3306:3306'

@@ -2,10 +2,10 @@
 .idea
 test.*
 test_docker.php
-/calculator-old/history.json
-/calculator/time.php
-/lessons/lafeta/*
-/lessons/PRRO-report/*
+/Old/calculator-old/history.json
+/Old/calculator/time.php
+/Old/lessons/lafeta/*
+/Old/lessons/PRRO-report/*
 
 
 
