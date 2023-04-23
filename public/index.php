@@ -15,6 +15,8 @@ include_once __DIR__.'/../config/bootstrap.php';
 
 $path = $_SERVER['REQUEST_URI'];
 
+$pdo = new \PDO('mysql:dbname=learn-php;host=learn-php-mysql', 'Olena', '123');
+
 if ($path === '/') {
     $controller = new \App\Controller\HomeController();
     $controller->handleAction();
@@ -34,6 +36,28 @@ if (strpos($path, '/calculator') === 0) {
 
     $controller = new \App\Controller\CalculatorController($calculator);
     $controller->handleAction();
+
+    exit();
+}
+
+if (strpos($path, '/blogs') === 0) {
+    if (\preg_match('#/blogs/(\d+)#', $path, $parts)) {
+        $blogId = $parts[1];
+
+        $controller = new \App\Controller\Blog\ViewBlogController($pdo);
+        $controller->handleAction($blogId);
+
+        exit();
+    }
+    $controller = new \App\Controller\Blog\ListBlogsController($pdo);
+    $controller->handleAction();
+
+    exit();
+}
+
+if (strpos($path, '/FAQ') === 0) {
+    $controller = new \App\Controller\FAQController();
+    $controller->hadleAction();
 
     exit();
 }

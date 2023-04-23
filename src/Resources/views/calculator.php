@@ -1,11 +1,5 @@
-<html>
-<head>
-</head>
-    <body>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/Calculator">Calculator</a>
-        </nav>
+<?php include_once __DIR__."/Fragment/header.php"; ?>
+
 
         <h1>Calculator</h1>
     <form method="post" action="/calculator">
@@ -40,5 +34,5 @@
         </div>
         <?php endif; ?>
     </form>
-    </body>
-</html>
+
+<?php include_once __DIR__."/Fragment/footer.php"; ?>
