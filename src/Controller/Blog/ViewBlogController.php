@@ -2,26 +2,30 @@
 
 namespace App\Controller\Blog;
 
+use App\Repository\BlogCommentRepository;
+use App\Repository\BlogRepository;
+
 class ViewBlogController
 {
-    private \PDO $pdo;
+    private BlogRepository $blogRepository;
+    private BlogCommentRepository $commentRepository;
 
-    public function __construct(\PDO $pdo)
+    public function __construct(BlogRepository $blogRepository, BlogCommentRepository $commentRepository)
     {
-        $this->pdo = $pdo;
+        $this->blogRepository = $blogRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     public function handleAction($blogId)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM blogs WHERE id = ?');
-        $stmt->execute([$blogId]);
-
-        $blog = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $blog = $this->blogRepository->find($blogId);
 
         if (false === $blog) {
             print 'Blog not found';
             exit();
         }
+
+        $comments = $this->commentRepository->findByBlog($blogId);
 
         include __DIR__.'/../../Resources/views/blog/view.php';
     }

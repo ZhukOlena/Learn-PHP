@@ -1,13 +1,41 @@
+DROP TABLE IF EXISTS blog_comments;
 DROP TABLE IF EXISTS blogs;
 
-CREATE TABLE blogs (
-                       id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                       created_at DATETIME NOT NULL,
-                       title VARCHAR(255) NOT NULL,
-                       preview TEXT NOT NULL,
-                       content TEXT NOT NULL
+SELECT * FROM blog_comments WHERE blog_id = 1;
 
+CREATE TABLE blogs (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    created_at DATETIME NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    preview TEXT NOT NULL,
+    content TEXT NOT NULL
 );
 
-INSERT INTO blogs (created_at, title, preview, content) VALUES ('1990-03-13 08:08:08', 'About my birthday', 'Tell you about me, my best day, and my family', 'My name is Olena. I am 33 years old. I live in very nice village all my childhood.' );
-INSERT INTO blogs (created_at, title, preview, content) VALUES ('1991-05-22 09:09:09', 'about my husband life', 'Tell your about my husband, his hobbits and life.', 'His name is Vitalii. He is 32 years old. He was born in town Khmelnytskyi.');
+CREATE TABLE blog_comments (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    blog_id INT NOT NULL,
+    created_at DATETIME NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    CONSTRAINT blog_comments_blog_id_fk FOREIGN KEY (blog_id) REFERENCES blogs (id)
+);
+
+CREATE TABLE faq (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    created_at DATETIME NOT NULL,
+    question TEXT NOT NULL,
+    answers TEXT NOT NULL,
+    priority INT DEFAULT 0
+);
+
+INSERT INTO faq (created_at, question, answers) VALUES ('2023-04-25 08:08:08', 'How it is work?', 'I dont now.' );
+INSERT INTO faq (created_at, question, answers) VALUES ('2023-04-25 11:11:11', 'What do you think?', 'It is not easy' );
+
+INSERT INTO blogs (created_at, title, preview, content) VALUES ('2023-04-22 09:09:09', 'Чи поширюються готівкові обмеження на розрахунки платіжними картками?', 'СГ мають право здійснювати розрахунки у безготівковій формі за допомогою платіжних карток через POS-термінал, інтернет-еквайринг протягом одного дня за одними або кількома платіжними документами з фізособами та ФОПами без обмежень суми', 'ДПСУ розповідає, що питання обмеження розрахунків готівкою між фізичними особами та фізичними особами – підприємцями із суб’єктами господарювання встановлюються і регулюються Положенням про ведення касових операцій у національній валюті в Україні, затвердженим постановою Правління НБУ від 29.12.2017 №148 (далі – Положення №148). Також зазначеним положенням визначається Порядок ведення касових операцій у національній валюті України юридичними особами (крім банків) та їх відокремленими підрозділами незалежно від організаційно-правової форми та форми власності, органами державної влади та органами місцевого самоврядування під час здійснення ними діяльності з виробництва, реалізації, придбання товарів чи іншої господарської діяльності (далі – установи), фізичними особами, які здійснюють підприємницьку діяльність (далі – фізичні особи – підприємці) (далі  – суб’єкти господарювання), фізичними особами.');
+INSERT INTO blogs (created_at, title, preview, content) VALUES ('2023-04-25 08:08:08', 'Бізнес просить не поспішати з поверненням довоєнних податкових правил', 'Южаніна наголосила, що на її електронну скриньку надходять листи від представників бізнесу та профільних асоціацій щодо законопроєкту №8401 про повернення довоєнних податків. Бізнес просить доопрацювати законопроєкт', 'Наприклад, для тієї частки ФОПів i юридичних осіб, які з березня 2022 року перейшли на сплату єдиного податку за ставкою 2%, це стало єдиною і безальтернативною можливістю встояти.');
+
+INSERT INTO blog_comments (blog_id, created_at, title, message ) VALUES (6, '2023-04-22 09:10:09', 'Умова 1', 'Iз суб’єктами господарювання протягом одного дня за одним або кількома платіжними документами – у розмірі до 50000 (п’ятдесят тисяч) гривень включно.');
+INSERT INTO blog_comments (blog_id, created_at, title, message) VALUES (6, '2023-04-22 09:10:55', ' умова така', 'з фізичними особами – у розмірі до 50000 (п’ятдесяти тисяч) гривень включно.');
+
+INSERT INTO blog_comments (blog_id, created_at, title, message) VALUE (7, '2023-04-25 10:10:55', 'Аргумент 1', 'Наприклад, для тієї частки ФОПів i юридичних осіб, які з березня 2022 року перейшли на сплату єдиного податку за ставкою 2%, це стало єдиною і безальтернативною можливістю встояти.');
+INSERT INTO blog_comments (blog_id, created_at, title, message) VALUE (7, '2023-04-25 10:10:55', 'Аргумент 2', 'Щодо відновлення документальних перевірок (тоді як усі інші види перевірок і так давно відновлено), то, на думку платників, саме перевірки податкової найбільше заважають у веденні бізнесу.');

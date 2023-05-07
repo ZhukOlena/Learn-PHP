@@ -2,26 +2,21 @@
 
 namespace App\Controller\Blog;
 
+use App\Repository\BlogRepository;
+
 class ListBlogsController
 {
-    /**
-     * @var \PDO
-     */
-    private \PDO $pdo;
+    private BlogRepository $blogRepository;
 
-    public function __construct(\PDO $pdo)
+    public function __construct(BlogRepository $blogRepository)
     {
-        $this->PDO = $pdo;
+        $this->blogRepository = $blogRepository;
     }
 
     public function handleAction ()
     {
-        $stmt = $this->PDO->prepare('SELECT * FROM blogs ORDER BY created_at DESC');
-        $stmt->execute();
-
-        $blogs = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $blogs = $this->blogRepository->findAll();
 
         include_once __DIR__.'/../../Resources/views/blog/list.php';
-
     }
 }

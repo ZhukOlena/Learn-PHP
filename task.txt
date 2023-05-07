@@ -1,0 +1,5 @@
+* Create table for save FAQ +++++
+* Controller ++++++
+* Entity ++++++
+* Repository +++++
+* template for render list of faq + change controller for use repository
